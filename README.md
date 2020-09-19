@@ -1,7 +1,5 @@
 # machinelearning
 For storage of the __udemy__ machine learning files
 
+And files created by __Ignacio__
 
-## This was written locally
-
-hola *emi*
