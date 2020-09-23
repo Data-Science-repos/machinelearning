@@ -7,7 +7,9 @@ x = dataset.iloc[:, 1:-1].values
 y = dataset.iloc[:, -1].values
 y = y.reshape(len(y),1)
 
-#feature scaling, the dependant variable has to be also scaled( using a new standard_scaler object because the first object would use the information obtained from scaling x
+# feature scaling, the dependant variable has to be also scaled( using a new standard_scaler object because the first
+# object would use the information obtained from scaling x
+
 from sklearn.preprocessing import StandardScaler
 
 sc_x = StandardScaler()
@@ -16,16 +18,16 @@ sc_y = StandardScaler()
 y = sc_y.fit_transform(y)
 
 
-#Training the SVR model
+# Training the SVR model
 from sklearn.svm import SVR
 
 regressor = SVR(kernel='rbf')
 regressor.fit(x, y)
 
-#Prediction and Reversing scaling to see the unscaled salaries
+# Prediction and Reversing scaling to see the unscaled salaries
 print(sc_y.inverse_transform(regressor.predict(sc_x.transform([[6.5]]))))
 
-#visualizing the model
+# visualizing the model
 print(x)
 plt.scatter(sc_x.inverse_transform(x), sc_y.inverse_transform(y), color='red')
 plt.plot(sc_x.inverse_transform(x),sc_y.inverse_transform(regressor.predict(x)), color='magenta')
