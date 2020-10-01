@@ -14,13 +14,17 @@ sc = StandardScaler()
 x_train = sc.fit_transform(x_train)
 x_test = sc.transform(x_test)
 
-# Training the K-NN Model
-from sklearn.neighbors import KNeighborsClassifier
-classifier = KNeighborsClassifier(n_neighbors=5, metric='minkowski', p=2)
-classifier.fit(x_train,y_train)
+# Training the SVM Model
+
+from sklearn.svm import SVC
+
+classifier = SVC(kernel='linear', random_state=0)
+classifier.fit(x_train, y_train)
 
 y_pred = classifier.predict(x_test)
+print(classifier.predict(sc.transform([[30, 87000]])))
 print(np.concatenate((y_test.reshape(len(y_test), 1), y_pred.reshape(len(y_pred), 1)), 1))
+
 # Making the Confusion Matrix
 from sklearn.metrics import confusion_matrix, accuracy_score
 
@@ -30,7 +34,6 @@ print(cm)
 acc_s = accuracy_score(y_test, y_pred)
 print(acc_s)
 # Ploting
-
 from matplotlib.colors import ListedColormap
 x_set, y_set = sc.inverse_transform(x_train), y_train
 x1, x2 = np.meshgrid(np.arange(start=x_set[:, 0].min() - 10, stop=x_set[:, 0].max() + 10, step = 0.25),
@@ -41,7 +44,7 @@ plt.xlim(x1.min(), x1.max())
 plt.ylim(x2.min(), x2.max())
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(x_set[y_set == j, 0], x_set[y_set == j, 1], c=ListedColormap(('red', 'green'))(i), label = j)
-plt.title('K-NN (Training set)')
+plt.title('SVM (Training set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
@@ -56,7 +59,7 @@ plt.xlim(X1.min(), X1.max())
 plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
-plt.title('K-NN (Test set)')
+plt.title('SVM (Test set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
