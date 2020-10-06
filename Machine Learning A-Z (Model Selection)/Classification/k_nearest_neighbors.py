@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the dataset
-dataset = pd.read_csv('ENTER_THE_NAME_OF_YOUR_DATASET_HERE.csv')
+dataset = pd.read_csv('Data.csv')
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
@@ -22,7 +22,7 @@ X_test = sc.transform(X_test)
 
 # Training the K-NN model on the Training set
 from sklearn.neighbors import KNeighborsClassifier
-classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
+classifier = KNeighborsClassifier(n_neighbors = 8, metric = 'minkowski', p = 2)
 classifier.fit(X_train, y_train)
 
 # Making the Confusion Matrix
@@ -30,4 +30,4 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 y_pred = classifier.predict(X_test)
 cm = confusion_matrix(y_test, y_pred)
 print(cm)
-accuracy_score(y_test, y_pred)
+print(accuracy_score(y_test, y_pred))
