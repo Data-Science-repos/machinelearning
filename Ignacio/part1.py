@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # creating dataset
-dataset = pd.read_csv('Part 1 - Data Preprocessing/Section 2 -------------------- Part 1 - Data Preprocessing --------------------/Python/Data.csv')
+dataset = pd.read_csv('data.csv')
 print(dataset)
 
 # preparing data
